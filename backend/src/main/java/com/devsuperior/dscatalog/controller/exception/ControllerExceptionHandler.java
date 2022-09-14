@@ -1,6 +1,6 @@
 package com.devsuperior.dscatalog.controller.exception;
 
-import com.devsuperior.dscatalog.exception.EntityNotFoundException;
+import com.devsuperior.dscatalog.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,8 +15,8 @@ import java.time.Instant;
 public class ControllerExceptionHandler {
     //Anotation tem que ter o nome da exceção para saber o tipo que ele vai tratar
     //Httpservlet request é uma classe que tem as informações da requisição http
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request){
         //Instancia a minha classe padrão de erro e seta as informações
         StandardError error = new StandardError();
         error.setTimeStamp(Instant.now());
