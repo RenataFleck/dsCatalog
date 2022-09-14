@@ -8,6 +8,8 @@ import com.devsuperior.dscatalog.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,14 +22,10 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
-    public List<CategoryDTO> findAll() {
-        List<Category> list = categoryRepository.findAll();
-
-        //Tranforma minha "list" em uma stream (forma mais fácil de trabalhar com coleções)
-        //Percorre cada elemento do "list" e instancia um objeto do tipo "categoryDTO" com base no item que está sendo mapeado do "list"
-        //Ao invés de usar expressão lamba usei method reference pois estou chamando apenas um método
-        //Transforma novamente em lista
-        return list.stream().map(CategoryDTO::new).toList();
+    public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+        //Page é uma stream
+        Page<Category> list = categoryRepository.findAll(pageRequest);
+        return list.map(CategoryDTO::new);
     }
 
     @Transactional(readOnly = true)
