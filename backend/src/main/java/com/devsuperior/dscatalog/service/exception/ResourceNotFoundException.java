@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.exception;
+package com.devsuperior.dscatalog.service.exception;
 
 //Classe padrão para chamarmos quando existir a possibilidade de teu um erro notfound em uma classe
 //A mensagem do construtor é personalizavel no método que chama essa classe
